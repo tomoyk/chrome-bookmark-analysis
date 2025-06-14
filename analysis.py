@@ -25,8 +25,8 @@ def normalize_url(url):
     return normalized
 
 def load_history(history_path):
-    # 30日前のWebkit時間を計算
-    time_limit = chrome_time(datetime.now() - timedelta(days=30))
+    # 30日前のWebkit時間を計算 (History timestamps are stored in UTC)
+    time_limit = chrome_time(datetime.utcnow() - timedelta(days=30))
 
     tmp_path = history_path.with_name("History_copy")
     tmp_path.write_bytes(history_path.read_bytes())
